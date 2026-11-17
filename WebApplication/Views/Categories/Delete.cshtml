@@ -1,0 +1,21 @@
+﻿@model BusinessLayer.Entities.Category
+
+@{
+    ViewData["Title"] = "Изтриване на категория";
+}
+
+<h2>Изтриване на категория</h2>
+<div class="alert alert-danger">Сигурни ли сте, че искате да изтриете тази категория?</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Име</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+    <dt class="col-sm-3">Описание</dt>
+    <dd class="col-sm-9">@Model.Description</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Потвърди изтриването</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>
