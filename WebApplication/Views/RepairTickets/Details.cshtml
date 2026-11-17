@@ -21,7 +21,7 @@
     <dd class="col-sm-9"><span class="badge bg-info text-dark">@Model.Status</span></dd>
 
     <dt class="col-sm-3">Ориентировъчна цена</dt>
-    <dd class="col-sm-9">@(Model.EstimatedPrice.HasValue ? $"{Model.EstimatedPrice:F2} лв." : "Очаква оценка")</dd>
+    <dd class="col-sm-9">@(Model.EstimatedPrice > 0 ? $"{Model.EstimatedPrice:F2} евро" : "Очаква оценка")</dd>
 
     <dt class="col-sm-3">Дата на подаване</dt>
     <dd class="col-sm-9">@Model.CreatedOn.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>

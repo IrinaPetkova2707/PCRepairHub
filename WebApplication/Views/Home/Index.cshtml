@@ -1,8 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Начало";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-5 mb-4 bg-light rounded-3 border shadow-sm">
+    <div class="container-fluid py-2">
+        <h1 class="display-5 fw-bold text-dark">Добре дошли в <span class="text-primary">PCRepairHub</span></h1>
+        <p class="col-md-9 fs-5 text-muted mt-3">
+            Система за управление на заявки за диагностика, профилактика и ремонт на компютърна техника.
+            Подайте заявка онлайн и следете статуса и цената на ремонта в реално време.
+        </p>
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <div class="d-flex flex-wrap gap-2 mt-4">
+                <a asp-controller="RepairTickets" asp-action="Index" class="btn btn-primary btn-lg">
+                    @(User.IsInRole("Admin") ? "Управление на всички заявки" : "Моите заявки за ремонт")
+                </a>
+                <a asp-controller="RepairTickets" asp-action="Create" class="btn btn-success btn-lg">
+                    + Подай нова заявка
+                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Categories" asp-action="Index" class="btn btn-warning btn-lg text-dark fw-semibold">
+                        Управление на категории
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="d-flex flex-wrap gap-2 mt-4">
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg">Вход в системата</a>
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-dark btn-lg">Създай акаунт</a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row align-items-md-stretch g-4">
+    <div class="col-md-4">
+        <div class="h-100 p-4 text-white bg-dark rounded-3 shadow-sm">
+            <h4 class="text-info">Хардуерна диагностика</h4>
+            <p class="mb-0">Бързо откриване и подмяна на дефектирали компоненти — дънни платки, видеокарти, захранвания, RAM и SSD дискове.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="h-100 p-4 bg-white border rounded-3 shadow-sm">
+            <h4 class="text-primary">Софтуер и оптимизация</h4>
+            <p class="mb-0">Инсталация и настройка на операционни системи, премахване на вируси, драйвери и възстановяване на изгубени данни.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="h-100 p-4 text-white bg-primary rounded-3 shadow-sm">
+            <h4>Профилактика и охлаждане</h4>
+            <p class="mb-0">Пълно почистване от прах и смяна на термопаста за по-тиха работа и по-дълъг живот на вашия лаптоп или компютър.</p>
+        </div>
+    </div>
 </div>
