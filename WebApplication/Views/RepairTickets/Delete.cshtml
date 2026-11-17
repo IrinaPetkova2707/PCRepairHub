@@ -1,0 +1,23 @@
+﻿@model BusinessLayer.Entities.RepairTicket
+
+@{
+    ViewData["Title"] = "Изтриване на заявка";
+}
+
+<h2>Изтриване на заявка #@Model.Id</h2>
+<div class="alert alert-danger">Сигурни ли сте, че искате да изтриете тази заявка?</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Устройство</dt>
+    <dd class="col-sm-9">@Model.DeviceModel</dd>
+    <dt class="col-sm-3">Категория</dt>
+    <dd class="col-sm-9">@Model.Category?.Name</dd>
+    <dt class="col-sm-3">Статус</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Потвърди изтриването</button>
+    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+</form>

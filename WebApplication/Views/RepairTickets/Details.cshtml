@@ -1,0 +1,34 @@
+﻿@model BusinessLayer.Entities.RepairTicket
+
+@{
+    ViewData["Title"] = "Детайли за заявка";
+}
+
+<h2>Детайли за заявка #@Model.Id</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Устройство</dt>
+    <dd class="col-sm-9">@Model.DeviceModel</dd>
+
+    <dt class="col-sm-3">Категория</dt>
+    <dd class="col-sm-9">@Model.Category?.Name</dd>
+
+    <dt class="col-sm-3">Клиент</dt>
+    <dd class="col-sm-9">@Model.Client?.Email</dd>
+
+    <dt class="col-sm-3">Статус</dt>
+    <dd class="col-sm-9"><span class="badge bg-info text-dark">@Model.Status</span></dd>
+
+    <dt class="col-sm-3">Ориентировъчна цена</dt>
+    <dd class="col-sm-9">@(Model.EstimatedPrice.HasValue ? $"{Model.EstimatedPrice:F2} лв." : "Очаква оценка")</dd>
+
+    <dt class="col-sm-3">Дата на подаване</dt>
+    <dd class="col-sm-9">@Model.CreatedOn.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">Описание на проблема</dt>
+    <dd class="col-sm-9">@Model.IssueDescription</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редакция</a>
+<a asp-action="Index" class="btn btn-secondary">Назад към списъка</a>

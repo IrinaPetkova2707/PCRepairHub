@@ -1,0 +1,60 @@
+﻿@model BusinessLayer.Entities.RepairTicket
+@using BusinessLayer.Enums
+
+@{
+    ViewData["Title"] = "Редакция на заявка";
+}
+
+<h2>Редакция на заявка #@Model.Id</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="DeviceModel" class="form-label">Модел на устройството</label>
+                <input asp-for="DeviceModel" class="form-control" />
+                <span asp-validation-for="DeviceModel" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label">Категория</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="IssueDescription" class="form-label">Описание на проблема</label>
+                <textarea asp-for="IssueDescription" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="IssueDescription" class="text-danger"></span>
+            </div>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="card border-warning mb-3">
+                    <div class="card-header bg-warning text-dark fw-bold">Администраторски панел</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Статус на ремонта</label>
+                            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<RepairStatus>()"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EstimatedPrice" class="form-label">Цена на ремонта (лв.)</label>
+                            <input asp-for="EstimatedPrice" class="form-control" type="number" step="0.01" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary">Запази промените</button>
+            <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

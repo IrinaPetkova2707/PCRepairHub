@@ -1,0 +1,41 @@
+﻿@model BusinessLayer.Entities.RepairTicket
+
+@{
+    ViewData["Title"] = "Нова заявка за ремонт";
+}
+
+<h2>Подаване на заявка за ремонт</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="DeviceModel" class="form-label">Модел на устройството</label>
+                <input asp-for="DeviceModel" class="form-control" placeholder="напр. Lenovo ThinkPad T14 / Custom PC" />
+                <span asp-validation-for="DeviceModel" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label">Категория</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories">
+                    <option value="">-- Изберете категория --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="IssueDescription" class="form-label">Описание на проблема</label>
+                <textarea asp-for="IssueDescription" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="IssueDescription" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Изпрати заявката</button>
+            <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
